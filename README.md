@@ -1,3 +1,4 @@
+
 # Setup: Lumen + Lighthouse + Passport
 
 This repository is just a fast forward setup and initial configurations to make Lumen works out of the box with GraphQL with Lighthouse  and secured by Laravel Passport.
@@ -41,3 +42,18 @@ Finally... run migration and generate passport keys:
 After installation completed, you can just serve the GraphQL server with:
 
     php -S 0.0.0.0:8000 -t public/
+    
+## Document your things:
+
+Install [GraphDoc](https://github.com/2fd/graphdoc) globally:
+
+    npm install -g @2fd/graphdoc
+
+Then generate your documentation just like this: 
+
+    graphdoc -e http://localhost:8000/graphql -o docs
+
+## TODO:
+
+* List of TODOs (yes, I know!)
+* ...

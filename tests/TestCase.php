@@ -26,7 +26,7 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
 
         $headers = $userToken ? ['Authorization' => 'Bearer ' . $userToken] : [];
 
-        return $this->post('/graphql', compact('query'), $headers);
+        return $this->post('/graphql', compact('query', 'variables'), $headers);
     }
 
     /**

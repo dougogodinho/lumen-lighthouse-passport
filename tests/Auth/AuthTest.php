@@ -29,6 +29,23 @@ class AuthTest extends TestCase
         $this->assertNotNull($this->getJson('data.auth.user.name'));
     }
 
+    public function testLoginWithVars()
+    {
+        $user = factory(User::class)->create();
+
+        $this->graphql($q = '
+            mutation Auth($email: String!, $password: String!){
+                auth(email: $email password: $password) { 
+                    token user{ id name } 
+                }
+            }
+        ', null, ['password' => 'secret', 'email' => $user->email]);
+
+        $this->assertNotNull($this->getJson('data.auth.token'));
+        $this->assertNotNull($this->getJson('data.auth.user.id'));
+        $this->assertNotNull($this->getJson('data.auth.user.name'));
+    }
+
     public function testCheckLogin()
     {
         $user = factory(User::class)->create();
