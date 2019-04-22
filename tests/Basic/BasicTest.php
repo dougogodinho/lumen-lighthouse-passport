@@ -3,13 +3,8 @@
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 
-class ExampleTest extends TestCase
+class BasicTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testExample()
     {
         $this->get('/');
@@ -17,5 +12,11 @@ class ExampleTest extends TestCase
         $this->assertEquals(
             $this->app->version(), $this->response->getContent()
         );
+    }
+
+    public function testGraphQLHello()
+    {
+        $this->graphql('{hello}');
+        $this->assertNotNull($this->getJson('data.hello'));
     }
 }

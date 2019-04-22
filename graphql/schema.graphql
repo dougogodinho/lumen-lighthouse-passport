@@ -7,6 +7,15 @@ type Query {
     user(id: ID @eq): User @find(model: "App\\User")
 }
 
+type Mutation {
+    auth(email: String!, password: String!): AuthResponse
+}
+
+type AuthResponse {
+    user: User
+    token: String
+}
+
 type User {
     id: ID!
     name: String!
