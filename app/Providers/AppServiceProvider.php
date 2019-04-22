@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Lumen\Routing\Router;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,8 +22,10 @@ class AppServiceProvider extends ServiceProvider
     {
         app()->router->group([
             'namespace' => 'App\Http\Controllers',
-        ], function ($router) {
-
+        ], function (Router $router) {
+            $router->get('/', function () use ($router) {
+                return app()->version();
+            });
         });
     }
 
