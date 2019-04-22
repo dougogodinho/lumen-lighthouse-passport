@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 abstract class TestCase extends Laravel\Lumen\Testing\TestCase
 {
     /**
@@ -14,11 +16,17 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
 
     /**
      * @param $query
+     * @param null|string|User $userToken
+     * @param null $variables
      * @return TestCase
      */
-    public function graphql($query)
+    public function graphql($query, $userToken = null, $variables = null)
     {
-        return $this->post('/graphql', compact('query'));
+        $userToken = $userToken instanceof User ? $userToken->createToken('Test Case Request')->accessToken : $userToken;
+
+        $headers = $userToken ? ['Authorization' => 'Bearer ' . $userToken] : [];
+
+        return $this->post('/graphql', compact('query'), $headers);
     }
 
     /**
